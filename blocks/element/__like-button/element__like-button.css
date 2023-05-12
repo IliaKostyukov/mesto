@@ -3,6 +3,7 @@
   height: 19px;
   background: url(../../../images/element__like-button.svg);
   background-repeat: no-repeat;
+  object-fit: contain;
   border: none;
   cursor: pointer;
   align-self: center;
