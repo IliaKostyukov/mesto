@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mesto</title>
+  <link rel="stylesheet" href="pages/index.css">
+</head>
+
+<body class="body">
+
+  <div class="page">
+
+    <header class="header">
+      <img src="images/header__logo.svg" alt="Логотип проекта `Место`" class="header__logo">
+      <div class="header__line"></div>
+    </header>
+
+    <main class="content">
+
+      <section class="profile">
+        <img src="./images/cousteau.jpg" alt="Аватар профиля" class="profile__avatar">
+        <div class="profile__info">
+          <h1 class="profile__title">Жак-Ив Кусто</h1>
+          <button class="profile__edit-button"></button>
+          <p class="profile__subtitle">Исследователь океана</p>
+        </div>
+        <button class="profile__add-button"></button>
+      </section>
+
+      <section class="elements">
+        <ul class="elements__list">
+
+          <li class="element">
+            <div class="element__content">
+              <img src="./images/karachaevsk.jpg" alt="Заброшенная церковь в Карачаевских горах" class="element__image">
+              <div class="element__container">
+                <h2 class="element__caption">Карачаевск</h2>
+                <button class="element__like-button"></button>
+              </div>
+            </div>
+          </li>
+
+          <li class="element">
+            <div class="element__content">
+              <img src="./images/elbrus.jpg" alt="Панорама заката с видом на горы Эльбруса" class="element__image">
+              <div class="element__container">
+                <h2 class="element__caption">Гора Эльбрус</h2>
+                <button class="element__like-button"></button>
+              </div>
+            </div>
+          </li>
+
+          <li class="element">
+            <div class="element__content">
+              <img src="./images/dombay.jpg" alt="Пейзаж хвойного ущелья Домбая" class="element__image">
+              <div class="element__container">
+                <h2 class="element__caption">Домбай</h2>
+                <button class="element__like-button"></button>
+              </div>
+            </div>
+          </li>
+
+          <li class="element">
+            <div class="element__content">
+              <img src="./images/elbrus.jpg" alt="Панорама заката с видом на горы Эльбруса" class="element__image">
+              <div class="element__container">
+                <h2 class="element__caption">Гора Эльбрус</h2>
+                <button class="element__like-button"></button>
+              </div>
+            </div>
+          </li>
+
+          <li class="element">
+            <div class="element__content">
+              <img src="./images/dombay.jpg" alt="Пейзаж хвойного ущелья Домбая" class="element__image">
+              <div class="element__container">
+                <h2 class="element__caption">Домбай</h2>
+                <button class="element__like-button"></button>
+              </div>
+            </div>
+          </li>
+
+          <li class="element">
+            <div class="element__content">
+              <img src="./images/karachaevsk.jpg" alt="Заброшенная церковь в Карачаевских горах" class="element__image">
+              <div class="element__container">
+                <h2 class="element__caption">Карачаево-Черкесия</h2>
+                <button class="element__like-button"></button>
+              </div>
+            </div>
+          </li>
+
+        </ul>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      <p class="footer__copyright">&copy; 2023 Mesto Russia</p>
+    </footer>
+
+    <div class="popup">
+      <div class="popup__container">
+        <img src="./images/popup__close-button.svg" alt="Кнопка закрытия формы" class="popup__close-button">
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <form action="submit" class="popup__form">
+          <div class="popup__field popup__field_name">
+            <input type="text" class="popup__input popup__input_name" value="Жак-Ив Кусто">
+            <img src="./images/popup__line.svg" alt="" class="popup__line">
+          </div>
+          <div class="popup__field popup__field_info">
+            <input type="text" class="popup__input popup__input_info" value="Исследователь океана">
+            <img src="./images/popup__line.svg" alt="" class="popup__line">
+          </div>
+          <input type="submit" value="Сохранить" class="popup__save-button">
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="./scripts/index.js"></script>
+</body>
+</html>
