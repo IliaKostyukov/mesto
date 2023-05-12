@@ -1,34 +1,32 @@
-const buttonLike = document.querySelectorAll('.element__like-button');
+// const buttonLike = document.querySelectorAll('.element__like-button');
 const buttonProfileEdit = document.querySelector('.profile__edit-button');
 const popup = document.querySelector('.popup');
 const buttonPopupClose = document.querySelector('.popup__close-button');
 const formElement = document.querySelector('.popup__form');
-const nameInput = document.querySelector('.popup__input_name');
-const jobInput = document.querySelector('.popup__input_info');
+const nameInput = document.querySelector('.popup__input_type_name');
+const jobInput = document.querySelector('.popup__input_type_info');
 const nameTitle = document.querySelector('.profile__title');
 const jobTitle = document.querySelector('.profile__subtitle');
 
 // like button style toggle
 
-for (let i = 0; i < buttonLike.length; i++) {
-  buttonLike[i].addEventListener('click', () => {
-    buttonLike[i].classList.toggle('element__like-button_active');
-  });
-}
+// for (let i = 0; i < buttonLike.length; i++) {
+//   buttonLike[i].addEventListener('click', () => {
+//     buttonLike[i].classList.toggle('element__like-button_active');
+//   });
+// }
 
 // open and close popup action
 
-buttonProfileEdit.addEventListener('click', () => {
-  popup.classList.add('popup__active');
-});
-
-function closePopup() {
-  popup.classList.remove('popup__active');
+function openPopup() {
   nameInput.value = nameTitle.textContent;
   jobInput.value = jobTitle.textContent
+  popup.classList.add('popup_active');
 }
 
-buttonPopupClose.addEventListener('click', closePopup);
+function closePopup() {
+  popup.classList.remove('popup_active');
+}
 
 popup.addEventListener('click', (evt) => {
   if (evt.target === evt.currentTarget) {
@@ -45,4 +43,8 @@ function handleFormSubmit(evt) {
   closePopup();
 }
 
+
+buttonProfileEdit.addEventListener('click', openPopup);
+buttonPopupClose.addEventListener('click', closePopup);
 formElement.addEventListener('submit', handleFormSubmit);
+

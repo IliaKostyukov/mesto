@@ -14,7 +14,6 @@
 
     <header class="header">
       <img src="images/header__logo.svg" alt="Логотип проекта `Место`" class="header__logo">
-      <div class="header__line"></div>
     </header>
 
     <main class="content">
@@ -103,17 +102,11 @@
 
     <div class="popup">
       <div class="popup__container">
-        <img src="./images/popup__close-button.svg" alt="Кнопка закрытия формы" class="popup__close-button">
+        <button type="button" class="popup__close-button"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form action="submit" class="popup__form">
-          <div class="popup__field popup__field_name">
-            <input type="text" class="popup__input popup__input_name" value="Жак-Ив Кусто">
-            <img src="./images/popup__line.svg" alt="" class="popup__line">
-          </div>
-          <div class="popup__field popup__field_info">
-            <input type="text" class="popup__input popup__input_info" value="Исследователь океана">
-            <img src="./images/popup__line.svg" alt="" class="popup__line">
-          </div>
+        <form action="submit" name="edit-profile-info" class="popup__form">
+            <input type="text" class="popup__input popup__input_type_name" value="Жак-Ив Кусто">
+            <input type="text" class="popup__input popup__input_type_info" value="Исследователь океана">
           <input type="submit" value="Сохранить" class="popup__save-button">
         </form>
       </div>
