@@ -20,3 +20,4 @@
 а также возможность смены аватара;
 
 ## Ссылка на опубликованый проект через Github Pages:
+https://iliakostyukov.github.io/mesto/
