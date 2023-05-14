@@ -17,3 +17,9 @@
     font-size: 14px;
   }
 }
+
+@media screen and (max-width: 425px) {
+  .profile__subtitle {
+    max-width: 282px;
+  }
+}
