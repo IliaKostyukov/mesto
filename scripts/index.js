@@ -2,11 +2,11 @@ import {initialCards} from "./cards.js";
 
 const buttonProfileEdit = document.querySelector('.profile__edit-button');
 const buttonProfileAdd = document.querySelector('.profile__add-button');
-const popup = document.querySelectorAll('.popup');
+const popups = document.querySelectorAll('.popup');
 const popupEdit = document.querySelector('.popup_type_edit');
 const popupAdd = document.querySelector('.popup_type_new-place');
 const popupFigure = document.querySelector('.popup_type_figure');
-const buttonPopupClose = document.querySelectorAll('.popup__close-button');
+const buttonsPopupClose = document.querySelectorAll('.popup__close-button');
 const formEdit = document.querySelector('.popup__form_type_edit');
 const formAdd = document.querySelector('.popup__form_type_add');
 const nameInput = document.querySelector('.popup__input_type_name');
@@ -16,13 +16,15 @@ const jobTitle = document.querySelector('.profile__subtitle');
 const inputPlace = document.querySelector('.popup__input_type_place');
 const inputUrl = document.querySelector('.popup__input_type_url');
 const elementsList = document.querySelector('.elements__list');
+const figureImage = document.querySelector('.popup__image');
+const figureCaption = document.querySelector('.popup__caption');
 
 // open and close popup action
 
   const togglePopup = currentPopup => currentPopup.classList.toggle('popup_active');
 
-  popup.forEach(item => {
-    item.addEventListener('click', (evt) => {
+  popups.forEach(item => {
+    item.addEventListener('mousedown', (evt) => {
       if (evt.target === evt.currentTarget) {
         togglePopup(evt.currentTarget);
       }
@@ -36,12 +38,11 @@ const elementsList = document.querySelector('.elements__list');
   }
 
   const handlePopupAdd = popupAdd => {
-    inputPlace.value = '';
-    inputUrl.value = '';
+    formAdd.reset();
     togglePopup(popupAdd);
   }
 
-  buttonPopupClose.forEach(item => {
+  buttonsPopupClose.forEach(item => {
     const parrentPopup = item.closest('.popup');
     item.addEventListener('click', () => togglePopup(parrentPopup));
   });
@@ -55,26 +56,24 @@ const submitFormEdit = (evt) => {
   togglePopup(popupEdit);
 }
 
-const buttonLikeAction = (cardElement) => {
+const likeButtonAction = (cardElement) => {
   const likeBtn = cardElement.querySelector('.element__like-button');
   likeBtn.addEventListener('click', (evt) => {
     evt.target.classList.toggle('element__like-button_active')
   });
 }
 
-const cardOpenAction = (name, link, cardImage) => {
+const openCardAction = (name, link, cardImage) => {
   cardImage.addEventListener('click', () => {
-    const figureImage = document.querySelector('.popup__image');
-    const figureCaption = document.querySelector('.popup__caption');
-
     figureImage.src = link;
+    figureImage.alt = name;
     figureCaption.textContent = name;
 
     togglePopup(popupFigure)
   });
 }
 
-const cardRemoveAction = (cardElement) => {
+const removeCardAction = (cardElement) => {
   const buttonTrash = cardElement.querySelector('.element__trash-button');
   buttonTrash.addEventListener('click', evt => {
     const element = evt.target.closest('.element');
@@ -89,11 +88,12 @@ const createCard = (name, link) => {
   const cardCaption = cardElement.querySelector('.element__caption');
 
   cardImage.src = link;
+  cardImage.alt = name;
   cardCaption.textContent = name;
 
-  cardOpenAction(name, link, cardImage);
-  cardRemoveAction(cardElement);
-  buttonLikeAction(cardElement);
+  openCardAction(name, link, cardImage);
+  removeCardAction(cardElement);
+  likeButtonAction(cardElement);
 
   return cardElement;
 }
