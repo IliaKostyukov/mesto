@@ -3,6 +3,12 @@
   margin: 0 auto;
 }
 
+@media screen and (max-width: 1279px) {
+  .elements {
+    max-width: 581px;
+  }
+}
+
 @media screen and (max-width: 1060px) {
   .elements {
     width: calc(100% - 19px * 2);
