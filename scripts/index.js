@@ -1,4 +1,5 @@
 import {initialCards} from "./cards.js";
+import { toggleButtonDisabledState, isValid, hideInputError, elements } from "./validation.js";
 
 const buttonProfileEdit = document.querySelector('.profile__edit-button');
 const buttonProfileAdd = document.querySelector('.profile__add-button');
@@ -23,6 +24,14 @@ const figureCaption = document.querySelector('.popup__caption');
 
   const togglePopup = currentPopup => currentPopup.classList.toggle('popup_active');
 
+  const closePopupEscButton = (popup) => {
+    window.addEventListener('keydown', evt => {
+      if (evt.key.toLowerCase() === 'escape') {
+        popup.classList.remove('popup_active');
+      }
+    });
+  }
+
   popups.forEach(item => {
     item.addEventListener('mousedown', (evt) => {
       if (evt.target === evt.currentTarget) {
@@ -34,17 +43,34 @@ const figureCaption = document.querySelector('.popup__caption');
   const handlePopupEdit = popupEdit => {
     nameInput.value = nameTitle.textContent;
     jobInput.value = jobTitle.textContent;
+
+    const inputList = Array.from(formEdit.querySelectorAll(elements.inputSelector));
+    inputList.forEach(input => {
+      isValid(popupEdit, input, elements);
+    })
+
+    const saveButton = formEdit.querySelector(elements.submitButtonSelector);
+    toggleButtonDisabledState(inputList, saveButton, elements);
+
+    closePopupEscButton(popupEdit);
     togglePopup(popupEdit);
   }
 
   const handlePopupAdd = popupAdd => {
     formAdd.reset();
+    const inputList = Array.from(formAdd.querySelectorAll(elements.inputSelector));
+    inputList.forEach(input => {
+      hideInputError(popupAdd, input, elements);
+    })
+    closePopupEscButton(popupAdd);
     togglePopup(popupAdd);
   }
 
   buttonsPopupClose.forEach(item => {
     const parrentPopup = item.closest('.popup');
-    item.addEventListener('click', () => togglePopup(parrentPopup));
+    item.addEventListener('click', () => {
+      togglePopup(parrentPopup);
+    });
   });
 
 // form functionality
@@ -69,7 +95,8 @@ const openCardAction = (name, link, cardImage) => {
     figureImage.alt = name;
     figureCaption.textContent = name;
 
-    togglePopup(popupFigure)
+    closePopupEscButton(popupFigure);
+    togglePopup(popupFigure);
   });
 }
 
@@ -108,6 +135,11 @@ const submitFormAdd = (evt) => {
   const card = createCard(inputPlace.value, inputUrl.value);
   elementsList.prepend(card);
   togglePopup(popupAdd);
+  inputPlace.value = '';
+  inputUrl.value = '';
+  const inputList = Array.from(formAdd.querySelectorAll(elements.inputSelector));
+  const saveButton = formAdd.querySelector(elements.submitButtonSelector);
+  toggleButtonDisabledState(inputList, saveButton, elements);
 }
 
 buttonProfileEdit.addEventListener('click', () => handlePopupEdit(popupEdit));
