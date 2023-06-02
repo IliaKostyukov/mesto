@@ -24,12 +24,14 @@ const figureCaption = document.querySelector('.popup__caption');
 
   const togglePopup = currentPopup => currentPopup.classList.toggle('popup_active');
 
-  const closePopupEscButton = (popup) => {
-    window.addEventListener('keydown', evt => {
+  const closePopupEscButton = popup => {
+    const closePopup = evt => {
       if (evt.key.toLowerCase() === 'escape') {
-        popup.classList.remove('popup_active');
+        togglePopup(popup);
+        document.removeEventListener('keydown', closePopup)
       }
-    });
+    }
+    document.addEventListener('keydown', closePopup)
   }
 
   popups.forEach(item => {
@@ -66,9 +68,9 @@ const figureCaption = document.querySelector('.popup__caption');
     togglePopup(popupAdd);
   }
 
-  buttonsPopupClose.forEach(item => {
-    const parrentPopup = item.closest('.popup');
-    item.addEventListener('click', () => {
+  buttonsPopupClose.forEach(button => {
+    const parrentPopup = button.closest('.popup');
+    button.addEventListener('click', () => {
       togglePopup(parrentPopup);
     });
   });
