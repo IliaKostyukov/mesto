@@ -30,7 +30,6 @@ const inputList = Array.from(formAdd.querySelectorAll(elements.inputSelector));
 
 const closePopupEscButton = (evt) => {
   if (evt.key.toLowerCase() === "escape") {
-    document.removeEventListener("keydown", closePopupEscButton);
     const popup = document.querySelector(".popup_active");
     closePopup(popup);
   }
