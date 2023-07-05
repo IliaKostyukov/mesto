@@ -1,6 +1,6 @@
 import { initialCards } from "./cards-data.js";
 import { FormValidator, elements } from "./FormValidator.js";
-import { Card } from "./card.js"
+import { Card } from "./Card.js"
 
 const buttonProfileEdit = document.querySelector(".profile__edit-button");
 const buttonProfileAdd = document.querySelector(".profile__add-button");
