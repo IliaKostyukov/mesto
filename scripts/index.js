@@ -7,11 +7,8 @@ const buttonProfileAdd = document.querySelector(".profile__add-button");
 const popups = document.querySelectorAll(".popup");
 const popupEdit = document.querySelector(".popup_type_edit");
 const popupAdd = document.querySelector(".popup_type_new-place");
-const popupFigure = document.querySelector(".popup_type_figure");
-const figureImage = document.querySelector(".popup__image");
-const figureCaption = document.querySelector(".popup__caption");
-const formEdit = document.querySelector(".popup__form_type_edit");
-const formAdd = document.querySelector(".popup__form_type_add");
+const formEdit = document.forms["profile-form"];
+const formAdd = document.forms["card-form"];
 const nameInput = document.querySelector(".popup__input_type_name");
 const jobInput = document.querySelector(".popup__input_type_info");
 const nameTitle = document.querySelector(".profile__title");
@@ -85,24 +82,16 @@ const submitFormEdit = (evt) => {
   closePopup(popupEdit);
 };
 
-// open figure popup function
-
-const openCardAction = (name, link, cardImage) => {
-  cardImage.addEventListener("click", () => {
-    figureImage.src = link;
-    figureImage.alt = name;
-    figureCaption.textContent = name;
-
-    openPopup(popupFigure);
-  });
-};
+const createCard = (data) => {
+  const newCard = new Card(data, templateSelector, openPopup);
+  return newCard.renderCard()
+}
 
 // render default cards
 
 initialCards.forEach((item) => {
-  const card = new Card(item, templateSelector, openCardAction);
-  const cardElement = card.renderCard();
-  cardsContainer.append(cardElement);
+  const card = createCard(item);
+  cardsContainer.append(card);
 });
 
 // add new user's card function
@@ -113,9 +102,8 @@ const submitFormAdd = (evt) => {
     name: inputPlace.value,
     link: inputUrl.value,
   };
-  const card = new Card(cardData, templateSelector, openCardAction);
-  const cardElement = card.renderCard();
-  cardsContainer.prepend(cardElement);
+  const card = createCard(cardData);
+  cardsContainer.prepend(card);
   closePopup(popupAdd);
   formValidationAdd.resetForm();
 };
