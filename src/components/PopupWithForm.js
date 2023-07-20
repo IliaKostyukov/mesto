@@ -10,21 +10,14 @@ export class PopupWithForm extends Popup {
   }
 
   _getInputValues() {
-    return {
-      [this._inputList[0].id]: this._inputList[0].value,
-      [this._inputList[1].id]: this._inputList[1].value
-    }
+    this._inputList = this._form.querySelectorAll('.popup__input');
+    this._formValues = {};
+    this._inputList.forEach(input => this._formValues[input.id] = input.value);
+    return this._formValues;
   }
 
   setEventListeners() {
-    this._popup.addEventListener('mousedown', (evt) => {
-      if (
-        evt.target === evt.currentTarget ||
-        evt.target.classList.contains("popup__close-button")
-      ) {
-        this.close(this._popup);
-      }
-    })
+    super.setEventListeners();
     this._form.addEventListener('submit', (evt) => {
       evt.preventDefault();
       this._handleSubmitForm(this._getInputValues());
@@ -32,8 +25,7 @@ export class PopupWithForm extends Popup {
   }
 
   close() {
-    document.removeEventListener('keydown', super._handleEscButton.bind(this));
-    this._popup.classList.remove('popup_active');
+    super.close();
     this._form.reset();
   }
 }

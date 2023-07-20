@@ -1,20 +1,13 @@
-const elements = {
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__save-button",
-  inactiveButtonClass: "popup__save-button_disabled",
-  inputErrorClass: "popup__input_type_error",
-  errorClass: "popup__error_visible",
-};
+import { selectorData } from '../pages/index.js'
 
 class FormValidator {
-  constructor (elements, form) {
+  constructor (selectorData, form) {
     this._form = form;
-    this._inputList = Array.from(form.querySelectorAll(elements.inputSelector));
-    this._buttonElement = form.querySelector(elements.submitButtonSelector);
-    this._inactiveButtonClass = elements.inactiveButtonClass;
-    this._inputErrorClass = elements.inputErrorClass;
-    this._errorClass = elements.errorClass;
+    this._inputList = Array.from(form.querySelectorAll(selectorData.inputSelector));
+    this._buttonElement = form.querySelector(selectorData.submitButtonSelector);
+    this._inactiveButtonClass = selectorData.inactiveButtonClass;
+    this._inputErrorClass = selectorData.inputErrorClass;
+    this._errorClass = selectorData.errorClass;
   }
 
   _showInputError(input, errorMessage) {
@@ -80,14 +73,10 @@ class FormValidator {
     })
   }
 
-  resetForm() {
-    this._form.reset();
-  }
-
   enableValidation() {
     this._setEventListeners();
   }
 }
 
-export { FormValidator, elements };
+export { FormValidator };
 

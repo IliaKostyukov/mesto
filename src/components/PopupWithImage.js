@@ -8,7 +8,7 @@ export class PopupWithImage extends Popup {
   }
 
   open(link, name) {
-    document.addEventListener('keydown', super._handleEscButton.bind(this));
+    super.open();
     this._figureImage.src = link;
     this._figureImage.alt = name;
     this._figureCaption.textContent = name;
