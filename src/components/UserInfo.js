@@ -5,9 +5,16 @@ export class UserInfo {
     this._avatar = document.querySelector(avatarSelector);
   }
 
-  setUserInfo(data) {
-    this._username.textContent = data.name;
-    this._about.textContent = data.about;
+  getUserInfo = () => {
+    return {
+      name: this._username.textContent,
+      about: this._about.textContent,
+    };
+  };
+
+  setUserInfo({name , about}) {
+    this._username.textContent = name;
+    this._about.textContent = about;
   }
 
   setUserAvatar(image) {

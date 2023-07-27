@@ -1,139 +1,83 @@
 export class Api {
   constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
-    this._authorization = headers.authorization;
-    this._contentType = headers["Content-Type"];
+    this._headers = headers;
+  }
+
+  _request(endpoint, options) {
+    return fetch(`${this._baseUrl}/${endpoint}`, options).then(this._checkResponse);
   }
 
   getInitialCards() {
-    return fetch(`${this._baseUrl}/cards`, {
-      headers: {
-        authorization: this._authorization,
-      },
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      return Promise.reject(`Error ${res.status}`);
-    });
+    return this._request('cards', {
+      headers: this._headers
+    })
   }
 
   getProfileData() {
-    return fetch(`${this._baseUrl}/users/me`, {
-      headers: {
-        authorization: this._authorization,
-      },
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      return Promise.reject(`Error ${res.status}`);
+    return this._request('users/me', {
+      headers: this._headers
     });
   }
 
   setProfileInfo(data) {
-    return fetch(`${this._baseUrl}/users/me`, {
+    return this._request('users/me', {
       method: "PATCH",
-      headers: {
-        authorization: this._authorization,
-        "Content-Type": this._contentType,
-      },
+      headers: this._headers,
       body: JSON.stringify({
         name: data["profile-name"],
         about: data["profile-about"],
-      }),
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      return Promise.reject(`Error ${res.status}`);
-    });
+      })
+    })
   }
 
   setProfileAvatar(avatar) {
-    return fetch(`${this._baseUrl}/users/me/avatar`, {
+    return this._request('users/me/avatar', {
       method: "PATCH",
-      headers: {
-        authorization: this._authorization,
-        "Content-Type": this._contentType,
-      },
+      headers: this._headers,
       body: JSON.stringify({
         avatar: avatar,
-      }),
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      return Promise.reject(`Error ${res.status}`);
-    });
+      })
+    })
   }
 
   addNewCard(data) {
-    return fetch(`${this._baseUrl}/cards`, {
+    return this._request('cards', {
       method: "POST",
-      headers: {
-        authorization: this._authorization,
-        "Content-Type": this._contentType,
-      },
+      headers: this._headers,
       body: JSON.stringify({
         name: data["card-name"],
         link: data["card-url"],
-      }),
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      return Promise.reject(`Error ${res.status}`);
-    });
+      })
+    })
   }
 
   deleteCard(cardId) {
-    return fetch(`${this._baseUrl}/cards/${cardId}`, {
+    return this._request(`cards/${cardId}`, {
       method: "DELETE",
-      headers: {
-        authorization: this._authorization,
-      },
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      return Promise.reject(`Error ${res.status}`);
-    });
+      headers: this._headers
+    })
   }
 
   addLike(id) {
-    return fetch(`${this._baseUrl}/cards/${id}/likes`, {
+    return this._request(`cards/${id}/likes`,{
       method: "PUT",
-      headers: {
-        authorization: this._authorization,
-      },
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      return Promise.reject(`Error ${res.status}`);
-    });
+      headers: this._headers
+    })
   }
 
   removeLike(id) {
-    return fetch(`${this._baseUrl}/cards/${id}/likes`, {
+    return this._request(`cards/${id}/likes`, {
       method: "DELETE",
-      headers: {
-        authorization: this._authorization,
-      },
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
+      headers: this._headers
+    })
+  }
 
-      return Promise.reject(`Error ${res.status}`);
-    });
+  _checkResponse(res) {
+    if (res.ok) {
+      return res.json();
+    }
+
+    return Promise.reject(`Error ${res.status}`);
   }
 }

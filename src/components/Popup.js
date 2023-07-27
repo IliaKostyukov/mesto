@@ -20,7 +20,7 @@ export class Popup {
         evt.target === evt.currentTarget ||
         evt.target.classList.contains("popup__close-button")
       ) {
-        this.close(this._popup);
+        this.close();
       }
     });
   }

@@ -32,8 +32,6 @@ export const popupFigureSelector = ".popup_type_figure";
 export const formEdit = document.forms["profile-form"];
 export const formAdd = document.forms["card-form"];
 export const formAvatar = document.forms["avatar-form"];
-export const nameInput = document.querySelector(".popup__input_type_name");
-export const jobInput = document.querySelector(".popup__input_type_info");
 export const formEditInputSelectors = {
   nameSelector: ".profile__title",
   infoSelector: ".profile__subtitle",

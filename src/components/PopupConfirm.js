@@ -7,8 +7,8 @@ export class PopupConfirm extends Popup {
     this._handleDelete = handleDelete;
   }
 
-  open(elementToDelete, cardId) {
-    this._elementToDelete = elementToDelete;
+  open(element, cardId) {
+    this._element = element;
     this._cardId = cardId;
     super.open();
   }
@@ -17,7 +17,7 @@ export class PopupConfirm extends Popup {
     super.setEventListeners();
     this._form.addEventListener("submit", (evt) => {
       evt.preventDefault();
-      this._handleDelete(this._elementToDelete, this._cardId);
+      this._handleDelete(this._element, this._cardId);
     });
   }
 }
